@@ -6,6 +6,7 @@ const authRoute = require("./routes/auth");
 const cookieSession = require("cookie-session");
 const passportStrategy = require("./passport");
 const app = express();
+const cookieParser = require('cookie-parser');
 
 app.use(
 	cookieSession({
@@ -15,8 +16,11 @@ app.use(
 	})
 );
 
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.set('view engine', 'hbs');
 
 app.use(
 	cors({
